@@ -8,7 +8,7 @@ import (
 	"reflect"
 	"testing"
 
-	gojose "github.com/go-jose/go-jose/v4/json"
+	gojose "github.com/go-jose/go-jose/v4"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/crypto/ed25519"
 	"pgregory.net/rapid"
@@ -18,7 +18,7 @@ import (
 	"github.com/ipld/go-ipld-prime/codec/dagjson"
 	"github.com/ipld/go-ipld-prime/datamodel"
 	"github.com/ipld/go-ipld-prime/fluent"
-	"github.com/ipld/go-ipld-prime/linking/cid"
+	cidlink "github.com/ipld/go-ipld-prime/linking/cid"
 	"github.com/ipld/go-ipld-prime/multicodec"
 	"github.com/ipld/go-ipld-prime/node/basicnode"
 	"github.com/ipld/go-ipld-prime/schema"
@@ -150,6 +150,7 @@ func validJWSGen() *rapid.Generator {
 	return rapid.Custom(func(t *rapid.T) datamodel.Node {
 		link := cidGen().Draw(t, "Valid DagJOSE payload").(cid.Cid)
 		privateKey := ed25519PrivateKeyGen().Draw(t, "valid jws private key").(ed25519.PrivateKey)
+
 		if signer, err := gojose.NewSigner(gojose.SigningKey{
 			Algorithm: gojose.EdDSA,
 			Key:       privateKey,
