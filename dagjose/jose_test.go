@@ -4,13 +4,14 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"github.com/stretchr/testify/require"
-	"golang.org/x/crypto/ed25519"
-	gojose "gopkg.in/square/go-jose.v2"
 	"io"
-	"pgregory.net/rapid"
 	"reflect"
 	"testing"
+
+	gojose "github.com/go-jose/go-jose/v4/json"
+	"github.com/stretchr/testify/require"
+	"golang.org/x/crypto/ed25519"
+	"pgregory.net/rapid"
 
 	"github.com/ipfs/go-cid"
 	"github.com/ipld/go-ipld-prime"
